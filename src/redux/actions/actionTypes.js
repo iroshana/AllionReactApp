@@ -1,0 +1,6 @@
+export const LOAD_ITEMS_SUCCESS = "LOAD_ITEMS_SUCCESS";
+export const BEGIN_API_CALL = "BEGIN_API_CALL";
+export const API_CALL_ERROR = "API_CALL_ERROR";
+export const ADD_ORDER = "ADD_ORDER";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
