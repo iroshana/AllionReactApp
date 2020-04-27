@@ -7,6 +7,7 @@ import PageNotFound from "./PageNotFound";
 import Footer from "./common/Footer";
 import Order from "./order/OrderItemList";
 import Login from "./login/Login";
+import TodayOrders from "./order/TodayOrders";
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
             <Route exact path="/" component={HomePage}></Route>
             <Route exact path="/order" component={Order}></Route>
             <Route exact path="/login" component={Login}></Route>
+            <Route exact path="/todayorder" component={TodayOrders}></Route>
             <Route component={PageNotFound} />
           </Switch>
         </Container>

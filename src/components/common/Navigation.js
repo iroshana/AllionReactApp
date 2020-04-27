@@ -46,7 +46,7 @@ class Navigation extends Component {
             {this.props.authName !== "" ? (
               <>
                 <NavLink exact to="/order" className="p-2 text-dark">
-                  My Orders -{" "}
+                  My Orders{" "}
                   <Badge variant="secondary">{this.props.orderItemCount}</Badge>
                 </NavLink>
                 |
@@ -55,8 +55,8 @@ class Navigation extends Component {
               ""
             )}
 
-            <NavLink exact to="/order" className="p-2 text-dark">
-              Today Orders - <Badge variant="secondary">0</Badge>
+            <NavLink exact to="/todayorder" className="p-2 text-dark">
+              Today Orders <Badge variant="secondary">0</Badge>
             </NavLink>
             {this.loginButton()}
           </nav>
