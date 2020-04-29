@@ -56,7 +56,7 @@ class Navigation extends Component {
             )}
 
             <NavLink exact to="/todayorder" className="p-2 text-dark">
-              Today Orders <Badge variant="secondary">0</Badge>
+              Today Orders
             </NavLink>
             {this.loginButton()}
           </nav>
@@ -74,7 +74,7 @@ Navigation.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    orderItemCount: state.order.length,
+    orderItemCount: state.order.orderItems.length,
     authName: state.authName,
   };
 }

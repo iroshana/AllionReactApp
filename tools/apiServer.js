@@ -35,7 +35,7 @@ server.use(function (req, res, next) {
 // Add createdAt to all POSTS
 server.use((req, res, next) => {
   if (req.method === "POST") {
-    req.body.createdAt = Date.now();
+    req.body.createdAt = new Date();
   }
   // Continue to JSON Server router
   next();
@@ -49,3 +49,19 @@ const port = 3001;
 server.listen(port, () => {
   console.log(`JSON Server is running on port ${port}`);
 });
+
+// Order Save API
+server.post("/orders/", function (req, res, next) {
+  const error = validateOrder(req.body);
+  if (error) {
+    res.status(400).send(error);
+  } else {
+    next();
+  }
+});
+
+validateOrder = (order) => {
+  if (!order.authUser) return "User is required.";
+  if (!order.id) return "OrderId is required.";
+  return "";
+};

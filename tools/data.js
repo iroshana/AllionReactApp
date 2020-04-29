@@ -31,7 +31,10 @@ const items = [
 
 const users = [];
 
+const orders = [];
+
 module.exports = {
   items,
   users,
+  orders,
 };

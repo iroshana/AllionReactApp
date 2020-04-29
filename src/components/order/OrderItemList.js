@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Button, Table } from "react-bootstrap";
 import propTypes from "prop-types";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as orderActions from "../../redux/actions/orderActions";
 
 class OrderItemList extends Component {
   constructor(props) {
@@ -71,7 +73,12 @@ class OrderItemList extends Component {
     this.props.history.push("/");
   }
 
-  confirmOrder() {}
+  confirmOrder() {
+    let order = {};
+    order.items = this.props.orderItems;
+    order.name = this.props.authName;
+    this.props.actions.saveOrder(order);
+  }
 
   render() {
     return (
@@ -103,13 +110,27 @@ OrderItemList.propTypes = {
   orderItems: propTypes.array.isRequired,
   orderItemCount: propTypes.number.isRequired,
   history: propTypes.object.isRequired,
+  actions: propTypes.object.isRequired,
+  authName: propTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    orderItems: state.order,
-    orderItemCount: state.order.length,
+    orderItems: state.order.orderItems,
+    orderItemCount: state.order.orderItems.length,
+    authName: state.authName,
   };
 }
 
-export default connect(mapStateToProps)(OrderItemList);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      saveOrder: bindActionCreators(
+        (order) => orderActions.saveOrder(order),
+        dispatch
+      ),
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderItemList);
