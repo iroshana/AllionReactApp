@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import * as itemsActions from "../../redux/actions/itemActions";
 import * as orderActions from "../../redux/actions/orderActions";
 import { connect } from "react-redux";
+import Spinner from "../common/Spinner";
 
 class HomePage extends React.Component {
   componentDidMount() {
@@ -20,10 +21,14 @@ class HomePage extends React.Component {
   render() {
     return (
       <>
-        <ItemList
-          items={this.props.items}
-          addOrderItem={this.props.actions.addOrderItem}
-        />
+        {this.props.loading ? (
+          <Spinner />
+        ) : (
+          <ItemList
+            items={this.props.items}
+            addOrderItem={this.props.actions.addOrderItem}
+          />
+        )}
       </>
     );
   }
@@ -32,11 +37,13 @@ class HomePage extends React.Component {
 HomePage.propTypes = {
   items: propTypes.array.isRequired,
   actions: propTypes.object.isRequired,
+  loading: propTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     items: state.items,
+    loading: state.apiCallsInProgress > 0,
   };
 }
 

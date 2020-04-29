@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as orderActions from "../../redux/actions/orderActions";
 import { Table } from "react-bootstrap";
+import Spinner from "../common/Spinner";
 
 class TodayOrders extends Component {
   componentDidMount() {
@@ -57,23 +58,27 @@ class TodayOrders extends Component {
   render() {
     return (
       <>
-        <div className="row">
-          <div className="col-md-12">
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>User</th>
-                  <th>Created Date</th>
-                  <th></th>
-                  <th>Bakery Item</th>
-                  <th>Qty</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
-              <tbody>{this.renderMyOrders()}</tbody>
-            </Table>
+        {this.props.loading ? (
+          <Spinner />
+        ) : (
+          <div className="row">
+            <div className="col-md-12">
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Created Date</th>
+                    <th></th>
+                    <th>Bakery Item</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>{this.renderMyOrders()}</tbody>
+              </Table>
+            </div>
           </div>
-        </div>
+        )}
       </>
     );
   }
@@ -82,11 +87,13 @@ class TodayOrders extends Component {
 TodayOrders.propTypes = {
   todayOrderList: propTypes.array.isRequired,
   actions: propTypes.object.isRequired,
+  loading: propTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     todayOrderList: state.order.todayOrderList,
+    loading: state.apiCallsInProgress > 0,
   };
 }
 
