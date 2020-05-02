@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 class OrderModal extends Component {
   constructor(props) {
@@ -65,19 +66,23 @@ class OrderModal extends Component {
   };
 
   order = () => {
-    this.setState({
-      isFormSubmitted: true,
-    });
-    if (this.state.isValidQty) {
-      let order = {};
-      order.qty = this.state.orderQty;
-      order.price = this.state.orderPrice;
-      order.item = this.state.item;
-      order.date = new Date();
+    if (this.props.authName !== "") {
+      this.setState({
+        isFormSubmitted: true,
+      });
+      if (this.state.isValidQty) {
+        let order = {};
+        order.qty = this.state.orderQty;
+        order.price = this.state.orderPrice;
+        order.item = this.state.item;
+        order.date = new Date();
 
-      this.props.addOrderItem(order);
+        this.props.addOrderItem(order);
 
-      this.setState({ isModalShow: false });
+        this.setState({ isModalShow: false });
+      }
+    } else {
+      this.props.history.push("/login");
     }
   };
 
@@ -130,6 +135,14 @@ OrderModal.propTypes = {
   isModalShow: PropTypes.bool.isRequired,
   selectedItem: PropTypes.object.isRequired,
   addOrderItem: PropTypes.func.isRequired,
+  authName: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
-export default OrderModal;
+function mapStateToProps(state) {
+  return {
+    authName: state.authName,
+  };
+}
+
+export default connect(mapStateToProps)(OrderModal);

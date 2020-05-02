@@ -27,6 +27,7 @@ class HomePage extends React.Component {
           <ItemList
             items={this.props.items}
             addOrderItem={this.props.actions.addOrderItem}
+            history={this.props.history}
           />
         )}
       </>
@@ -38,6 +39,7 @@ HomePage.propTypes = {
   items: propTypes.array.isRequired,
   actions: propTypes.object.isRequired,
   loading: propTypes.bool.isRequired,
+  history: propTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {

@@ -52,6 +52,7 @@ class ItemList extends Component {
           isModalShow={this.state.isModalShow}
           selectedItem={this.state.selectedItem}
           addOrderItem={addOrderItem}
+          history={this.props.history}
         ></OrderModal>
       </>
     );
@@ -61,6 +62,7 @@ class ItemList extends Component {
 ItemList.propTypes = {
   items: propTypes.array.isRequired,
   addOrderItem: propTypes.func.isRequired,
+  history: propTypes.object.isRequired,
 };
 
 export default ItemList;
