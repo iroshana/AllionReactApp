@@ -26,7 +26,12 @@ class ItemList extends Component {
             return (
               <div className="m-3" key={item.id}>
                 <Card style={{ width: "15rem" }}>
-                  <Card.Img variant="top" src={item.image} />
+                  <Card.Img
+                    variant="top"
+                    height="171"
+                    width="238"
+                    src={item.image}
+                  />
                   <Card.Body>
                     <Card.Title>{item.name}</Card.Title>
                     <Card.Text>Rs. {item.price}</Card.Text>
