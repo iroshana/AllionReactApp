@@ -15,10 +15,10 @@ const items = [
   },
   {
     id: 3,
-    name: "Ginger Tea",
+    name: "Green Tea",
     image:
-      "http://www.baltana.com/files/wallpapers-8/Tea-Smoke-Wallpaper-24025.jpg",
-    price: "20.00",
+      "http://www.baltana.com/files/wallpapers-8/Green-Tea-Background-Wallpapers-23820.jpg",
+    price: "50.00",
   },
   {
     id: 4,
